@@ -52,6 +52,8 @@ button {
   background-color: #ccc;
   color: #333;
   position: absolute;
+  top: 0;
+  left: 150px; /* initial position */
 }
 </style>
 </head>
@@ -69,10 +71,19 @@ button {
 
 <script>
 const noBtn = document.getElementById("no");
+const container = document.querySelector(".buttons");
 
 noBtn.addEventListener("mouseover", () => {
-  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+  // Get container dimensions
+  const containerRect = container.getBoundingClientRect();
+
+  // Calculate max X/Y inside the container
+  const maxX = container.clientWidth - noBtn.offsetWidth;
+  const maxY = container.clientHeight - noBtn.offsetHeight;
+
+  // Random positions within container
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
 
   noBtn.style.left = `${x}px`;
   noBtn.style.top = `${y}px`;
@@ -100,3 +111,4 @@ function yesClicked() {
 
 </body>
 </html>
+
