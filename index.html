@@ -10,7 +10,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  background: linear-gradient(135deg, #a1c4fd, #c2e9fb); /* light blue gradient */
   font-family: 'Comic Sans MS', cursive, sans-serif;
   overflow: hidden;
 }
@@ -24,7 +24,7 @@ body {
 }
 
 h1 {
-  color: #ff4d6d;
+  color: #1e90ff; /* darker blue for contrast */
   margin-bottom: 30px;
 }
 
@@ -43,7 +43,7 @@ button {
 }
 
 #yes {
-  background-color: #ff4d6d;
+  background-color: #1e90ff; /* blue button */
   color: white;
   margin-right: 20px;
 }
@@ -53,7 +53,13 @@ button {
   color: #333;
   position: absolute;
   top: 0;
-  left: 150px; /* initial position */
+  left: 150px;
+}
+
+#message {
+  margin-top: 15px;
+  color: #1e90ff;
+  font-size: 16px;
 }
 </style>
 </head>
@@ -67,26 +73,38 @@ button {
     <button id="yes" onclick="yesClicked()">Yes 💘</button>
     <button id="no">No 💔</button>
   </div>
+
+  <p id="message"></p>
 </div>
 
 <script>
 const noBtn = document.getElementById("no");
 const container = document.querySelector(".buttons");
+const messageBox = document.getElementById("message");
+
+// Messages to display when hovering over "No"
+const messages = [
+  "So you don’t want to be my Valentine huh? 😢",
+  "You don’t love me anymore? 💔",
+  "Wow… that really hurts 😔",
+  "Are you sure about that? 🥺",
+  "My heart is breaking right now 💔"
+];
 
 noBtn.addEventListener("mouseover", () => {
-  // Get container dimensions
-  const containerRect = container.getBoundingClientRect();
-
-  // Calculate max X/Y inside the container
+  // move button inside the white box
   const maxX = container.clientWidth - noBtn.offsetWidth;
   const maxY = container.clientHeight - noBtn.offsetHeight;
 
-  // Random positions within container
   const x = Math.random() * maxX;
   const y = Math.random() * maxY;
 
   noBtn.style.left = `${x}px`;
   noBtn.style.top = `${y}px`;
+
+  // show a random sad message
+  const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+  messageBox.textContent = randomMsg;
 });
 
 function yesClicked() {
@@ -96,7 +114,7 @@ function yesClicked() {
       display:flex;
       align-items:center;
       justify-content:center;
-      background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+      background:linear-gradient(135deg,#a1c4fd,#c2e9fb);
       font-family:'Comic Sans MS', cursive;
       text-align:center;
     ">
@@ -111,4 +129,3 @@ function yesClicked() {
 
 </body>
 </html>
-
